@@ -1,12 +1,15 @@
 package com.testbot;
 
-
 import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.Random;
 
 public class TestBotAPI {
     private final String version = "1.0.0";
+
+    private boolean[] buttonState = {false, false, false, false};
+
+    public String qrString = "Test String";
 
     private Runnable[] functions = new Runnable[]{
             () -> {
@@ -159,9 +162,124 @@ public class TestBotAPI {
     public void disableAllButtons() {
         System.out.println("[INFO] called disableAllButtons at" + new Date());
 
-        functions[0] = () -> {};
-        functions[1] = () -> {};
-        functions[2] = () -> {};
-        functions[3] = () -> {};
+        functions[0] = () -> {
+        };
+        functions[1] = () -> {
+        };
+        functions[2] = () -> {
+        };
+        functions[3] = () -> {
+        };
+    }
+
+    public void toggleButtonLight(Button button) {
+        System.out.println("[INFO] called toggleButtonLight at" + new Date());
+
+        switch (button) {
+            case A:
+                if (buttonState[0]) {
+                    System.out.println("[INFO] Button Light is already ON");
+                } else {
+                    buttonState[0] = true;
+                    System.out.println("[INFO] Button Light state is now ON");
+                }
+                break;
+            case B:
+                if (buttonState[1]) {
+                    System.out.println("[INFO] Button Light is already ON");
+                } else {
+                    buttonState[1] = true;
+                    System.out.println("[INFO] Button Light state is now ON");
+                }
+                break;
+            case X:
+                if (buttonState[2]) {
+                    System.out.println("[INFO] Button Light is already ON");
+                } else {
+                    buttonState[2] = true;
+                    System.out.println("[INFO] Button Light state is now ON");
+                }
+                break;
+            case Y:
+                if (buttonState[3]) {
+                    System.out.println("[INFO] Button Light is already ON");
+                } else {
+                    buttonState[3] = true;
+                    System.out.println("[INFO] Button Light state is now ON");
+                }
+                break;
+        }
+    }
+
+    public void SetButtonLight(Button button, boolean state) {
+        System.out.println("[INFO] called setButtonLight at" + new Date() + " setting button " + button.toString() + "to " + state);
+        switch (button) {
+            case A:
+                buttonState[0] = state;
+                break;
+            case B:
+                buttonState[1] = state;
+                break;
+            case X:
+                buttonState[2] = state;
+                break;
+            case Y:
+                buttonState[3] = state;
+                break;
+        }
+    }
+
+    public void setButtonLightBrightness(Button button, int brightness) {
+        System.out.println("[INFO] called setButtonLightBrightness at " + new Date() + "setting brightness to " + brightness);
+    }
+
+    public boolean getButtonState(Button button) {
+        System.out.println("[INFO] called getButtonState at" + new Date());
+
+        switch (button) {
+            case A:
+                return buttonState[0];
+
+            case B:
+                return buttonState[1];
+
+            case X:
+                return buttonState[2];
+
+            case Y:
+                return buttonState[3];
+
+        }
+        return false;
+    }
+
+
+    public void fillButtonLights() {
+        System.out.println("[INFO] called fillButtonLights at" + new Date());
+        for (int i = 0; i < 4; i++) {
+            buttonState[i] = true;
+        }
+    }
+
+    public void disableButtonLights() {
+        System.out.println("[INFO] called disableButtonLights at" + new Date());
+        for (int i = 0; i < 4; i++) {
+            buttonState[i] = false;
+        }
+    }
+
+    public void SetQRString(String qrString) {
+        this.qrString = qrString;
+    }
+
+    public BufferedImage getQRImage() {
+        System.out.println("[INFO] called getQRImage at" + new Date());
+        return new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+    }
+
+    public String decodeQRImage(BufferedImage qrImage) {
+        System.out.println("[INFO] called decodeQRImage at" + new Date());
+        return this.qrString;
     }
 }
+
